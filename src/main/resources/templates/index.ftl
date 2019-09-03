@@ -5,7 +5,11 @@
     <title>FreeMarker</title>
 </head>
 <body>
-<h1>this is freemarker</h1>
-<h1>${msg!}</h1>
+<form action="/registerUser" method="get">
+    用户名:<input type="text" name="userName"><br>
+    密码:<input type="text" name="passWord">
+  <input type="submit" value="提交" />
+</form>
+
 </body>
 </html>

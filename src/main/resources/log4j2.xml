@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR">
+	<Appenders>
+		<Console name="stdout" target="SYSTEM_OUT">
+			<PatternLayout pattern="%-5p %d{MM-dd HH:mm:ss} [%m] [%l] %n" />
+		</Console>
+		
+		<!-- 输出到日志文件源 -->
+		<RollingFile name="R" fileName="logs/springBoot/springBoot.log"
+			filePattern="logs/springBoot/springBoot_%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<Pattern>%-5p %d{MM-dd HH:mm:ss} [%m] [%l] %n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+		</RollingFile>
+		<!--						 interface_end						-->					
+	</Appenders>
+
+	<Loggers>
+		<!-- ROOT输出级别声明 -->
+		<Root level="ERROR">
+			<AppenderRef ref="stdout" />
+			<AppenderRef ref="R" />
+		</Root>
+		
+		<!-- 包日志输出级别声明 -->
+		<Logger name="com.hzy" level="INFO"/>
+		
+		<Logger name="org.springframework" level="ERROR" />
+		
+		<Logger name="org.directwebremoting" level="ERROR" />
+	</Loggers>
+
+</Configuration>
