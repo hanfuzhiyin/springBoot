@@ -1,4 +1,4 @@
-package com.hzy.util.common;
+package com.hxyc.util.common;
 
 /**
  * @auther hzy

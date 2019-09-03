@@ -1,4 +1,4 @@
-package com.hzy.util;
+package com.hxyc.util;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.Resource;
 
-import com.hzy.config.RedisConfiguration;
+import com.hxyc.config.RedisConfiguration;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

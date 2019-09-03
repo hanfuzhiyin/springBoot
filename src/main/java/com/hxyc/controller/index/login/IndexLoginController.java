@@ -3,17 +3,17 @@
  * Copyright (c) 2019 ZDSoft Networks, Inc. All rights reserved.
  * $Id$
  */
-package com.hzy.controller.index.login;
+package com.hxyc.controller.index.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hzy.entity.User;
-import com.hzy.service.index.login.IndexLoginService;
-import com.hzy.util.common.CodeMsg;
-import com.hzy.util.common.Result;
+import com.hxyc.entity.User;
+import com.hxyc.service.index.login.IndexLoginService;
+import com.hxyc.util.common.CodeMsg;
+import com.hxyc.util.common.Result;
 
 /**
  * @author user

@@ -3,7 +3,7 @@
  * Copyright (c) 2019 ZDSoft Networks, Inc. All rights reserved.
  * $Id$
  */
-package com.hzy.service;
+package com.hxyc.service;
 
 import java.util.List;
 import java.util.Map;

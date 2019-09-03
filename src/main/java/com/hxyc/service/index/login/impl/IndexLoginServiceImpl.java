@@ -3,13 +3,13 @@
  * Copyright (c) 2019 ZDSoft Networks, Inc. All rights reserved.
  * $Id$
  */
-package com.hzy.service.index.login.impl;
+package com.hxyc.service.index.login.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.hzy.entity.User;
-import com.hzy.service.RedisService;
-import com.hzy.service.index.login.IndexLoginService;
+import com.hxyc.entity.User;
+import com.hxyc.service.RedisService;
+import com.hxyc.service.index.login.IndexLoginService;
 
 /**
  * @author huangzy

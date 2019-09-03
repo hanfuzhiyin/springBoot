@@ -3,7 +3,7 @@
  * Copyright (c) 2019 ZDSoft Networks, Inc. All rights reserved.
  * $Id$
  */
-package com.hzy.entity;
+package com.hxyc.entity;
 
 import java.io.Serializable;
 

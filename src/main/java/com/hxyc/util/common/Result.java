@@ -1,4 +1,4 @@
-package com.hzy.util.common;
+package com.hxyc.util.common;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,4 +1,4 @@
-package com.hzy;
+package com.hxyc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

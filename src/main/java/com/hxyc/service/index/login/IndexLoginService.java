@@ -3,9 +3,9 @@
  * Copyright (c) 2019 ZDSoft Networks, Inc. All rights reserved.
  * $Id$
  */
-package com.hzy.service.index.login;
+package com.hxyc.service.index.login;
 
-import com.hzy.entity.User;
+import com.hxyc.entity.User;
 
 /**
  * @author huangzy
@@ -15,7 +15,7 @@ public interface IndexLoginService {
 
     /**
      * 注册用户
-     * 
+     *
      * @param user
      * @return
      */

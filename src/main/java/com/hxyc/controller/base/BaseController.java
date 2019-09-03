@@ -1,9 +1,9 @@
-/* 
+/*
  * @(#)BaseController.java    Created on 2019年9月3日
  * Copyright (c) 2019 ZDSoft Networks, Inc. All rights reserved.
  * $Id$
  */
-package com.hzy.controller.base;
+package com.hxyc.controller.base;
 
 /**
  * @author user

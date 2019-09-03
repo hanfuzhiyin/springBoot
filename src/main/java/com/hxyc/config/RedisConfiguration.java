@@ -3,7 +3,7 @@
  * Copyright (c) 2019 ZDSoft Networks, Inc. All rights reserved.
  * $Id$
  */
-package com.hzy.config;
+package com.hxyc.config;
 
 import java.lang.reflect.Method;
 
