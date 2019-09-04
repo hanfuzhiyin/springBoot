@@ -2,4 +2,5 @@
 more than one time zone的解决方法
   A:从错误即可知道是时区的错误，因此只要将时区设置为你当前系统时区即可(https://blog.csdn.net/u011429743/article/details/100535878)
   
-2.mybatis返回值一直为null
+2.mybatis插入,修改返回值一直为null
+  A:使用了错误标签,使用了select,但是应该使用insert update 标签
