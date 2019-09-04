@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import com.hxyc.config.common.interceptor.AdminInterceptor;
 import com.hxyc.config.common.interceptor.IndexInterceptor;
 
 /**
@@ -20,13 +21,16 @@ import com.hxyc.config.common.interceptor.IndexInterceptor;
 @Configuration // 将其变成配置类
 public class WebConfig extends WebMvcConfigurationSupport {
     // 需要拦截的路径
-    String[] addPathPatterns = { "/index/**", "/admin/**" };
+    String[] indexPathPatterns = { "/home/**" };
+    String[] adminPathPatterns = { "/admin/**" };
     // 不拦截的路径
     String[] excludePathPatterns = { "/hello", "/login", "/register", "loginOut" };
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new IndexInterceptor()).addPathPatterns(addPathPatterns)
+        registry.addInterceptor(new IndexInterceptor()).addPathPatterns(indexPathPatterns)
+                .excludePathPatterns(excludePathPatterns);
+        registry.addInterceptor(new AdminInterceptor()).addPathPatterns(adminPathPatterns)
                 .excludePathPatterns(excludePathPatterns);
     }
 

@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version $Revision: 1.0 $, $Date: 2019年9月3日 下午3:20:44 $
  */
 @Controller
+@RequestMapping(value = "/home")
 public class IndexController {
 
-    @RequestMapping(value = "index")
+    @RequestMapping(value = "/index")
     public String indexPage() {
         return "index";
     }

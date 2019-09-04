@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @author huangzy
  * @version $Revision: 1.0 $, $Date: 2019年9月4日 上午9:48:46 $
  */
-public class IndexInterceptor implements HandlerInterceptor {
-    private static final Logger logger = LoggerFactory.getLogger("IndexInterceptor");
+public class AdminInterceptor implements HandlerInterceptor {
+    private static final Logger logger = LoggerFactory.getLogger("AdminInterceptor");
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
