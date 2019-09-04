@@ -5,7 +5,7 @@
     <title>FreeMarker</title>
 </head>
 <body>
-<form action="/registerUser" method="get">
+<form action="/home/registerUser" method="get">
     用户名:<input type="text" name="userName"><br>
     密码:<input type="text" name="passWord">
   <input type="submit" value="提交" />

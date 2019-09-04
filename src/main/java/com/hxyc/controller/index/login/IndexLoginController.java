@@ -21,15 +21,17 @@ import com.hxyc.util.common.Result;
  *
  */
 @Controller
+@RequestMapping("/home")
 public class IndexLoginController {
 
     @Autowired
     private IndexLoginService indexLoginService;
 
-    @RequestMapping(value = "registerUser")
+    @RequestMapping(value = "/registerUser")
     @ResponseBody
     public Result<String> registerUser(User user) {
         int data = indexLoginService.registerUser(user);
+        System.out.println("***************" + data);
         if (data > 0) {
             return Result.success();
         }

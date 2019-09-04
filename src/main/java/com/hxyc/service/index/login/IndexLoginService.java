@@ -19,6 +19,6 @@ public interface IndexLoginService {
      * @param user
      * @return
      */
-    int registerUser(User user);
+    Integer registerUser(User user);
 
 }

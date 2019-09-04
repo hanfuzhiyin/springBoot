@@ -9,7 +9,7 @@
         <result column="realName" jdbcType="VARCHAR" property="realName" />
     </resultMap>
  
-    <select id="registerUser" parameterType="com.hxyc.entity.User">
+    <select id="registerUser" parameterType="com.hxyc.entity.User" resultType="Integer">
         insert into hxyc_user(id,username,password)values(#{id},#{userName},#{passWord});
     </select>
 </mapper>

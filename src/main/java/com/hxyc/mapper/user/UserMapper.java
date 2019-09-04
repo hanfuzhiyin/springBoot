@@ -16,5 +16,5 @@ import com.hxyc.entity.User;
 @Repository
 public interface UserMapper {
 
-    int registerUser(User user);
+    Integer registerUser(User user);
 }

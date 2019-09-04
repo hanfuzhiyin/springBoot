@@ -24,7 +24,7 @@ public class IndexLoginServiceImpl extends RedisService implements IndexLoginSer
     private UserMapper userMapper;
 
     @Override
-    public int registerUser(User user) {
+    public Integer registerUser(User user) {
         return userMapper.registerUser(user);
     }
 }
