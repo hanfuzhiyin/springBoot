@@ -5,9 +5,11 @@
  */
 package com.hxyc.service.index.login.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hxyc.entity.User;
+import com.hxyc.mapper.user.UserMapper;
 import com.hxyc.service.RedisService;
 import com.hxyc.service.index.login.IndexLoginService;
 
@@ -18,12 +20,11 @@ import com.hxyc.service.index.login.IndexLoginService;
 @Service(value = "indexLoginService")
 public class IndexLoginServiceImpl extends RedisService implements IndexLoginService {
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public int registerUser(User user) {
-        boolean set = set("user", user);
-        if (set) {
-            return 1;
-        }
-        return 0;
+        return userMapper.registerUser(user);
     }
 }

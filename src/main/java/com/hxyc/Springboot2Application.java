@@ -1,10 +1,12 @@
 package com.hxyc;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+@MapperScan("com.hxyc.mapper")
 @SpringBootApplication
 public class Springboot2Application extends SpringBootServletInitializer {
 
