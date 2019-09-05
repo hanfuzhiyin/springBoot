@@ -17,4 +17,6 @@ import com.hxyc.entity.User;
 public interface UserMapper {
 
     Integer registerUser(User user);
+
+    User getUserByUserName(String userName);
 }

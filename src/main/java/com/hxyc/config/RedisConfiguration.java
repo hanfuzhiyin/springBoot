@@ -7,7 +7,7 @@ package com.hxyc.config;
 
 import java.lang.reflect.Method;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -17,8 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -27,13 +26,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 @EnableCaching // 开启注解
+//maxInactiveIntervalInSeconds:session的统一过期时间,默认是1800秒过期，这里测试修改为60秒
 public class RedisConfiguration extends CachingConfigurerSupport {
-    @Value("${spring.redis.host}")
-    private String host;
-    @Value("${spring.redis.port}")
-    private Integer port;
-    @Value("${spring.redis.password}")
-    private String password;
 
     @Override
     @Bean
@@ -61,44 +55,21 @@ public class RedisConfiguration extends CachingConfigurerSupport {
     /**
      * @Description: 防止redis入库序列化乱码的问题
      * @return 返回类型
-     * @date 2018/4/12 10:54
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
+    @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<Object, Object>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        redisTemplate.setKeySerializer(new StringRedisSerializer());// key序列化
-        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer(Object.class)); // value序列化
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringRedisSerializer);// key序列化
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer()); // value序列化
 
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.setHashKeySerializer(stringRedisSerializer);
+        redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
 
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
 
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

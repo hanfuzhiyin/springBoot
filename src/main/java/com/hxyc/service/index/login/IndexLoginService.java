@@ -21,4 +21,12 @@ public interface IndexLoginService {
      */
     Integer registerUser(User user);
 
+    /**
+     * 通过用户名查询用户
+     * 
+     * @param userName
+     * @return
+     */
+    User getUserByUserName(String userName);
+
 }

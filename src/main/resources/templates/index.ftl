@@ -5,6 +5,7 @@
     <title>FreeMarker</title>
 </head>
 <body>
+已经登录的用户${userName!}
 <form action="/home/registerUser" method="get">
     用户名:<input type="text" name="userName"><br>
     密码:<input type="text" name="passWord">

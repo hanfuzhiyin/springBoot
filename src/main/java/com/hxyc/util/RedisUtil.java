@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.Resource;
 
-import com.hxyc.config.RedisConfiguration;
+import com.hxyc.config.common.RedisConfig;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -19,7 +19,7 @@ import redis.clients.util.SafeEncoder;
 
 public class RedisUtil {
     @Resource
-    RedisConfiguration redisConfig;
+    RedisConfig redisConfig;
     // 默认缓存时间
     private static final int EXPIRE = 60000;
 

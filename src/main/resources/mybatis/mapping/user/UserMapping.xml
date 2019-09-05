@@ -13,5 +13,8 @@
         insert into hxyc_user(id,username,password)values(#{id},#{userName},#{passWord});
     </insert>
     
+    <select id="getUserByUserName" parameterType="String" resultType="com.hxyc.entity.User">
+        select * from hxyc_user where username=#{0};
+    </select>
     
 </mapper>

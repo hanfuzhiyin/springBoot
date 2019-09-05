@@ -35,6 +35,10 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
             </exclusions>
        </dependency>
 		<!--springBoot的aop-->
@@ -52,6 +56,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
+        
        <!--开发阶段使用：springboot热启动(热部署)：项目有更改，自动编译：需配置idea   true生效-->
        <dependency>
            <groupId>org.springframework.boot</groupId>
@@ -59,13 +64,6 @@
            <optional>true</optional>
        </dependency>
        
-        <!-- log4j2 s -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-log4j2</artifactId>
-		</dependency>
-        <!-- log4j2 e -->
-		
 		<dependency>  <!-- 支持识别yml配置 -->
 	      <groupId>com.fasterxml.jackson.dataformat</groupId>
 	      <artifactId>jackson-dataformat-yaml</artifactId>
@@ -76,6 +74,7 @@
            <groupId>org.springframework.boot</groupId>
            <artifactId>spring-boot-starter-data-redis</artifactId>
        </dependency>
+       
        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -85,11 +84,13 @@
             <artifactId>jedis</artifactId>
         </dependency>
 	    <!-- redis e -->
-	    <dependency>
-           <groupId>org.projectlombok</groupId>
-           <artifactId>lombok</artifactId>
-           <optional>true</optional>
-        </dependency>
+	    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+
         
         <dependency>
 		    <groupId>org.apache.commons</groupId>
@@ -115,6 +116,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
    </dependencies>
    

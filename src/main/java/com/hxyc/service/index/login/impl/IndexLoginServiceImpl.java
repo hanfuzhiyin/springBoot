@@ -27,4 +27,21 @@ public class IndexLoginServiceImpl extends RedisService implements IndexLoginSer
     public Integer registerUser(User user) {
         return userMapper.registerUser(user);
     }
+
+    @Override
+    public User getUserByUserName(String userName) {
+        if (hasKey(userName)) {
+            Object object = get(userName);
+            System.out.println(object);
+            User user = (User) get(userName);
+            if (null != (user)) {
+                System.out.println("缓存返回**********************");
+                return user;
+            }
+        }
+        User user = userMapper.getUserByUserName(userName);
+        set(userName, user);
+        System.out.println("数据库返回**********************");
+        return user;
+    }
 }
