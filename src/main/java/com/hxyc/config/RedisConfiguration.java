@@ -19,6 +19,9 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.session.web.http.CookieSerializer;
+import org.springframework.session.web.http.DefaultCookieSerializer;
 
 /**
  * @author user
@@ -27,6 +30,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableCaching // 开启注解
 //maxInactiveIntervalInSeconds:session的统一过期时间,默认是1800秒过期，这里测试修改为60秒
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800) // 注解，开启redis集中session管理
 public class RedisConfiguration extends CachingConfigurerSupport {
 
     @Override
@@ -46,6 +50,12 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         };
     }
 
+    /**
+     * redis作为缓存
+     *
+     * @param redisTemplate
+     * @return
+     */
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheManager redisCacheManager = RedisCacheManager.builder(connectionFactory).build();
@@ -72,4 +82,20 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         return redisTemplate;
     }
 
+    /**
+     * 在springboot中使用spring-session的时候， 在不同的域名下面需要配置cookie主域否则session共享不生效
+     *
+     * @return
+     */
+    @Bean
+    public CookieSerializer cookieSerializer() {
+        DefaultCookieSerializer defaultCookieSerializer = new DefaultCookieSerializer();
+        // cookie名字
+        defaultCookieSerializer.setCookieName("sessionId");
+        // 不同子域时设置
+        // defaultCookieSerializer.setDomainName("xxx.com");
+        // 设置各web应用返回的cookiePath一致
+        defaultCookieSerializer.setCookiePath("/");
+        return defaultCookieSerializer;
+    }
 }

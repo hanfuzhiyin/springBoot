@@ -18,7 +18,7 @@ spring:
     request-context-attribute: request
     suffix: .ftl
   session:
-    store-type: redis
+    store-type: redis      
   redis:
     host: 127.0.0.1
     port: 6379
