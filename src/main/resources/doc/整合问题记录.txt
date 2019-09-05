@@ -2,5 +2,9 @@
 more than one time zone的解决方法
   A:从错误即可知道是时区的错误，因此只要将时区设置为你当前系统时区即可(https://blog.csdn.net/u011429743/article/details/100535878)
   
-2.mybatis插入,修改返回值一直为null
+2.Q:mybatis插入,修改返回值一直为null
   A:使用了错误标签,使用了select,但是应该使用insert update 标签
+  
+3.Q:freemark页面无法访问静态资源
+  A:默认采用springboot 静态资源路径在src/main/resources创建/static 或 /public 或 /resources 或 /META-INF/resources可以直接访问静态资源，默认会放到classpath目录中
+    页面直接/js/jquery-1.9.1.min.js 缺省/static

@@ -5,6 +5,7 @@
  */
 package com.hxyc.controller.index.login;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hxyc.config.common.constant.BaseConstant;
+import com.hxyc.controller.base.BaseController;
 import com.hxyc.entity.User;
 import com.hxyc.service.RedisService;
 import com.hxyc.service.index.login.IndexLoginService;
 import com.hxyc.util.common.CodeMsg;
 import com.hxyc.util.common.Result;
+import com.hxyc.util.common.Validation;
 import com.hxyc.util.http.HttpServletRequestUtil;
 
 /**
@@ -26,7 +29,7 @@ import com.hxyc.util.http.HttpServletRequestUtil;
  */
 @Controller
 @RequestMapping("/home")
-public class IndexLoginController {
+public class IndexLoginController extends BaseController {
 
     @Autowired
     private IndexLoginService indexLoginService;
@@ -45,9 +48,32 @@ public class IndexLoginController {
         }
     }
 
+    @RequestMapping(value = "checkUserName")
+    @ResponseBody
+    public Result<String> checkUserName(String userName) {
+        if (StringUtils.isNotBlank(userName)) {
+            if (userName.length() > 10) {
+                return errorAndMes("用户名不能超过10位!");
+            }
+            if (!Validation.checkUserName(userName)) {
+                return errorAndMes("用户名规则[首字母+数字字母组成的6-12位]");
+            }
+            if (redisService.hasKey(userName)) {
+                if (StringUtils.isNotBlank(redisService.get(userName).toString())) {
+                    return errorAndMes("重复的用户名");
+                }
+            }
+        }
+        return success();
+    }
+
     @RequestMapping(value = "/login")
     @ResponseBody
     public Result<String> login(String userName, String passWord, String verification) {
+        String oldName = redisService.get(userName).toString();
+        if (StringUtils.isNotBlank(oldName)) {
+            errorAndMes("重复的用户名");
+        }
         User user = indexLoginService.getUserByUserName(userName);
         HttpServletRequestUtil.getRequest().getSession().setAttribute(BaseConstant.USER_SESSION, user);
         return Result.success();
