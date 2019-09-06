@@ -5,6 +5,7 @@
  */
 package com.hxyc.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,7 +22,7 @@ import org.springframework.util.CollectionUtils;
  */
 @SuppressWarnings(value = { "rawtypes", "unchecked" })
 @Component
-public class RedisService {
+public class RedisService<V> {
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -704,6 +705,28 @@ public class RedisService {
     }
 
     /**
+     * 从右侧开始插入数据
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public long rightPushAll(Object key, Object... value) {
+        return redisTemplate.opsForList().rightPush(key, value);
+    }
+
+    /**
+     * 从右侧开始插入数据
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public long rightPushAll(Object key, Collection<V> value) {
+        return redisTemplate.opsForList().rightPush(key, value);
+    }
+
+    /**
      * 从左侧开始插入数据
      *
      * @param key
@@ -712,6 +735,39 @@ public class RedisService {
      */
     public long leftPush(Object key, Object value) {
         return redisTemplate.opsForList().leftPush(key, value);
+    }
+
+    /**
+     * 从左侧开始插入数据
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public long leftPushAll(Object key, Object... value) {
+        return redisTemplate.opsForList().leftPush(key, value);
+    }
+
+    /**
+     * 从左侧开始插入数据
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public long leftPushAll(Object key, Collection<V> value) {
+        return redisTemplate.opsForList().leftPush(key, value);
+    }
+
+    /**
+     * 移除集合中右边的元素，同时在左边加入一个元素
+     *
+     * @param rightKey
+     * @param leftKey
+     * @return
+     */
+    public Object rightPopAndLeftPush(String rightKey, String leftKey) {
+        return redisTemplate.opsForList().rightPopAndLeftPush(rightKey, leftKey);
     }
 
     /**
