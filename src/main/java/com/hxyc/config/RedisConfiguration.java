@@ -17,11 +17,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.PatternTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
+
+import com.hxyc.config.common.constant.BaseConstant;
+import com.hxyc.message.RedisMessage;
 
 /**
  * @author user
@@ -98,4 +104,31 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         defaultCookieSerializer.setCookiePath("/");
         return defaultCookieSerializer;
     }
+
+    /**
+     * 创建连接工厂
+     *
+     * @param connectionFactory
+     * @param adapter
+     * @return
+     */
+    @Bean
+    public RedisMessageListenerContainer container(RedisConnectionFactory connectionFactory,
+            MessageListenerAdapter adapter) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.addMessageListener(adapter, new PatternTopic(BaseConstant.REDIS_MESSAGE_KEY));
+        return container;
+    }
+
+    /**
+     * @param message
+     * @return
+     */
+    @Bean
+    public MessageListenerAdapter adapter(RedisMessage message) {
+        // onMessage 如果RedisMessage 中 没有实现接口，这个参数必须跟RedisMessage中的读取信息的方法名称一样
+        return new MessageListenerAdapter(message, "onMessage");
+    }
+
 }

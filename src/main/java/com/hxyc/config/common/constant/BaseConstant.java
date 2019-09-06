@@ -12,4 +12,6 @@ package com.hxyc.config.common.constant;
 public class BaseConstant {
 
     public static final String USER_SESSION = "USERNAME";
+
+    public static final String REDIS_MESSAGE_KEY = "REDIS_MESSAGE";
 }

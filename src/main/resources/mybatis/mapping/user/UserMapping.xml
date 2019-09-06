@@ -9,11 +9,11 @@
         <result column="realName" jdbcType="VARCHAR" property="realName" />
     </resultMap>
  
-    <insert id="registerUser" parameterType="com.hxyc.entity.User">
-        insert into hxyc_user(id,username,password)values(#{id},#{userName},#{passWord});
+    <insert id="registerUser" parameterType="User">
+        insert into hxyc_user(id,username,password,publickey,privatekey)values(#{id},#{userName},#{passWord},#{publickey},#{privatekey});
     </insert>
     
-    <select id="getUserByUserName" parameterType="String" resultType="com.hxyc.entity.User">
+    <select id="getUserByUserName" parameterType="String" resultType="User">
         select * from hxyc_user where username=#{0};
     </select>
     

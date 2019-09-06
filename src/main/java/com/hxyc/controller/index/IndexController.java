@@ -5,8 +5,13 @@
  */
 package com.hxyc.controller.index;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.hxyc.config.common.constant.BaseConstant;
+import com.hxyc.service.RedisService;
 
 /**
  * @author user
@@ -16,8 +21,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/home")
 public class IndexController {
 
+    @Autowired
+    private RedisService redisService;
+
     @RequestMapping(value = "/index")
     public String indexPage() {
         return "index";
+    }
+
+    @RequestMapping(value = "sendMessage")
+    @ResponseBody
+    public String sendMessage(String msg) {
+        redisService.sendMessage(BaseConstant.REDIS_MESSAGE_KEY, msg);
+        return "";
     }
 }

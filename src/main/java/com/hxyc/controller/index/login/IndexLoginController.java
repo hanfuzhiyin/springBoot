@@ -18,6 +18,7 @@ import com.hxyc.entity.User;
 import com.hxyc.service.RedisService;
 import com.hxyc.service.index.login.IndexLoginService;
 import com.hxyc.util.common.CodeMsg;
+import com.hxyc.util.common.RSAEncrypt;
 import com.hxyc.util.common.Result;
 import com.hxyc.util.common.Validation;
 import com.hxyc.util.http.HttpServletRequestUtil;
@@ -35,18 +36,6 @@ public class IndexLoginController extends BaseController {
     private IndexLoginService indexLoginService;
     @Autowired
     private RedisService redisService;
-
-    @RequestMapping(value = "/registerUser")
-    @ResponseBody
-    public Result<String> registerUser(User user) {
-        int data = indexLoginService.registerUser(user);
-        if (data > 0) {
-            return Result.success();
-        }
-        else {
-            return Result.error(CodeMsg.DEFEAT);
-        }
-    }
 
     @RequestMapping(value = "checkUserName")
     @ResponseBody
@@ -67,16 +56,47 @@ public class IndexLoginController extends BaseController {
         return success();
     }
 
+    @RequestMapping(value = "/registerUser")
+    @ResponseBody
+    public Result<String> registerUser(User user) {
+        if (redisService.hasKey(user.getUserName())) {
+            String oldName = redisService.get(user.getUserName()).toString();
+            if (StringUtils.isNotBlank(oldName)) {
+                errorAndMes("重复的用户名");
+            }
+        }
+        int data = indexLoginService.registerUser(user);
+        if (data > 0) {
+            return Result.success();
+        }
+        else {
+            return Result.error(CodeMsg.DEFEAT);
+        }
+    }
+
     @RequestMapping(value = "/login")
     @ResponseBody
     public Result<String> login(String userName, String passWord, String verification) {
-        String oldName = redisService.get(userName).toString();
-        if (StringUtils.isNotBlank(oldName)) {
-            errorAndMes("重复的用户名");
+        if (StringUtils.isBlank(userName) || StringUtils.isBlank(passWord)) {
+            return errorAndMes("请输入用户名和密码!");
         }
         User user = indexLoginService.getUserByUserName(userName);
-        HttpServletRequestUtil.getRequest().getSession().setAttribute(BaseConstant.USER_SESSION, user);
-        return Result.success();
+        if (null == user) {
+            return errorAndMes("找不到该用户!");
+        }
+        try {
+            String pwd = RSAEncrypt.decrypt(user.getPassWord(), user.getPrivatekey());
+            if (pwd.equals(passWord)) {
+
+                HttpServletRequestUtil.getRequest().getSession().setAttribute(BaseConstant.USER_SESSION, user);
+                return Result.success();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return errorAndMes("系统错误!" + e);
+        }
+        return errorAndMes("用户名或密码不正确!");
     }
 
     @RequestMapping(value = "/getUser")
