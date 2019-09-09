@@ -51,7 +51,6 @@ public class IndexController {
             user.setPassWord("pwd" + i);
             redisService.leftPush("waitSaveUser", user);
         }
-
         return "";
     }
 
@@ -67,6 +66,7 @@ public class IndexController {
         else {
             User user1 = (User) redisService.rightPop("saveUser");
             System.out.println("保存失败" + user1.toString());
+            redisService.sendMessage(BaseConstant.REDIS_MESSAGE_KEY, "保存失败" + user1.toString());
             redisService.leftPush("waitSaveUser", user1);
 
         }

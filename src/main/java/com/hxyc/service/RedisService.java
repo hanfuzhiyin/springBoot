@@ -476,6 +476,19 @@ public class RedisService<V> {
             return 0;
         }
     }
+
+    /**
+     * 移除指定索引位置的成员
+     *
+     * @param key
+     * @param start
+     * @param end
+     * @return
+     */
+    public Long removeRange(String key, long start, long end) {
+        return redisTemplate.opsForZSet().removeRange(key, start, end);
+    }
+
     // ===============================list=================================
 
     /**
@@ -627,6 +640,27 @@ public class RedisService<V> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 裁剪list
+     *
+     * @param key
+     * @param start
+     * @param end
+     */
+    public void lTrim(String key, long start, long end) {
+        redisTemplate.opsForList().trim(key, start, end);
+    }
+
+    /**
+     * 获取列表长度
+     *
+     * @param key
+     * @return
+     */
+    public Long lLen(String key) {
+        return redisTemplate.opsForList().size(key);
     }
 
     /**
