@@ -5,12 +5,16 @@
  */
 package com.hxyc.controller.index;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hxyc.config.common.constant.BaseConstant;
+import com.hxyc.controller.base.BaseController;
 import com.hxyc.entity.User;
 import com.hxyc.service.RedisService;
 import com.hxyc.service.index.IndexService;
@@ -21,7 +25,7 @@ import com.hxyc.service.index.IndexService;
  */
 @Controller
 @RequestMapping(value = "/home")
-public class IndexController {
+public class IndexController extends BaseController {
 
     @Autowired
     private RedisService redisService;
@@ -44,13 +48,15 @@ public class IndexController {
     @ResponseBody
     public String setUserQueue() {
         User user = null;
+        List<User> users = new ArrayList<User>();
         for (int i = 1; i < 21; i++) {
             user = new User();
             user.setUserName("test" + i);
             user.setId(i + 0L);
             user.setPassWord("pwd" + i);
-            redisService.leftPush("waitSaveUser", user);
+            users.add(user);
         }
+        redisService.leftPush("waitSaveUser", users);
         return "";
     }
 

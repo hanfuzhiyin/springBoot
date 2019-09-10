@@ -5,6 +5,11 @@
  */
 package com.hxyc.controller.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.hxyc.config.properties.HXYC;
 import com.hxyc.util.common.CodeMsg;
 import com.hxyc.util.common.Result;
 
@@ -13,6 +18,15 @@ import com.hxyc.util.common.Result;
  * @version $Revision: 1.0 $, $Date: 2019年9月3日 下午3:21:33 $
  */
 public class BaseController {
+
+    @Autowired
+    private HXYC hxyc;
+
+    @ModelAttribute
+    public void initParams(ModelMap map) {
+        map.put("version", hxyc.getVersion());
+        map.put("footInfo", hxyc.getFootInfo());
+    }
 
     /**
      * 返回成功

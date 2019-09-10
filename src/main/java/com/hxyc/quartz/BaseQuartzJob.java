@@ -28,17 +28,17 @@ public class BaseQuartzJob {
 
     @Scheduled(cron = "0/3 * * * * ? ") // cron表达式
     public void saveUserTask() {
-        redisService.sendMessage(BaseConstant.REDIS_MESSAGE_KEY, "开始处理保存用户!");
-        List<Object> userList = redisService.lGet("waitSaveUser", 0, 10);
+        List<User> userList = (List<User>) redisService.rightPop("waitSaveUser");
+        if (null == userList) {
+            return;
+        }
         int i = 0;
-        for (Object object : userList) {
-            User user = (User) object;
+        for (User user : userList) {
             if (i == 5) {// 模拟保存失败
                 redisService.leftPush("errUser", user);
+                redisService.sendMessage(BaseConstant.REDIS_MESSAGE_KEY, "用户[" + user.getUserName() + "]保存失败!");
             }
-            System.err.println(user.getUserName());
             i++;
         }
-        redisService.removeRange("waitSaveUser", 0, 10);
     }
 }

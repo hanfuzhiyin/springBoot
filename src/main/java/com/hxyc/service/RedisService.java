@@ -458,12 +458,12 @@ public class RedisService<V> {
     }
 
     /**
-     * 移除值为value的
+     ** 移除值为value的
      *
      * @param key
-     *            键
+     **            键
      * @param values
-     *            值 可以是多个
+     **            值 可以是多个
      * @return 移除的个数
      */
     public long setRemove(String key, Object... values) {
@@ -478,7 +478,7 @@ public class RedisService<V> {
     }
 
     /**
-     * 移除指定索引位置的成员
+     * * 移除指定索引位置的成员
      *
      * @param key
      * @param start
