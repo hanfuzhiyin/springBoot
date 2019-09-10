@@ -26,6 +26,8 @@ public class BaseController {
     public void initParams(ModelMap map) {
         map.put("version", hxyc.getVersion());
         map.put("footInfo", hxyc.getFootInfo());
+        map.put("platFormName", hxyc.getPlatFormName());
+        map.put("domain", hxyc.getDomain());
     }
 
     /**

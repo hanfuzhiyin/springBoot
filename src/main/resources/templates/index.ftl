@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
-    
+<title>${platFormName!"华夏衣裳"}</title>
+      
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -18,65 +18,14 @@
     </script>
     <!--// Meta tag Keywords -->
     
-    <!-- css files -->
-    <link rel="stylesheet" href="/index/css/bootstrap.css"> <!-- Bootstrap-Core-CSS -->
-    <link rel="stylesheet" href="/index/css/style.css" type="text/css" media="all" /> <!-- Style-CSS --> 
-    <link rel="stylesheet" href="/index/css/font-awesome.min.css" type="text/css" media="all" /> <!-- Style-CSS --> 
-    <!-- //css files -->
-    
-    <!--web font-->
-    <link href="http://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <!--//web font-->
-
+    <#include "/index/common/common.ftl">  
 </head>
 
 <body>
 
 <!-- header -->
-<header>
-    <div class="container">
-        <div class="header d-lg-flex justify-content-between align-items-center">
-            <div class="header-agile">
-                <h1>
-                    <a class="navbar-brand logo" href="index.html">
-                        <span class="fa"></span>华夏衣裳
-                    </a>
-                </h1>
-            </div>
-            <div class="nav_w3ls">
-                <nav>
-                    <label for="drop" class="toggle mt-lg-0 mt-2"><span class="fa fa-bars" aria-hidden="true"></span></label>
-                    <input type="checkbox" id="drop" />
-                        <ul class="menu">
-                            <li class="mr-lg-3 mr-2 active"><a href="index.html">主页</a></li>
-                            <li class="mr-lg-3 mr-2"><a href="about.html">店铺推荐</a></li>
-                            <li class="mr-lg-3 mr-2"><a href="services.html">汉服知识</a></li>
-                            <li class="mr-lg-3 mr-2"><a href="services.html">同袍交友</a></li>
-                            <li class="mr-lg-3 mr-2"><a href="services.html">论坛</a></li>
-                            <li class="mr-lg-3 mr-2"><a href="services.html">活动</a></li>
-                            <li class="mr-lg-3 mr-2 p-0">
-                            <!-- First Tier Drop Down -->
-                            <label for="drop-2" class="toggle">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">个人中心 <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                            <input type="checkbox" id="drop-2"/>
-                            <ul class="inner-dropdown">
-                                <li><a href="#how">我的收藏</a></li>
-                                <li><a href="#team">我的好友</a></li>
-                                <li><a href="#blog">个人主页</a></li>
-                                <li><a href="#stats">个人设置</a></li>
-                            </ul>
-                            </li>
-                            <li><a href="projects.html">Projects</a></li>
-                        </ul>
-                </nav>
-            </div>
-            <div class="buttons mt-lg-0 mt-2">
-                <a href="contact.html">Contact Us </a>
-            </div>
-
-        </div>
-    </div>
-</header>
+<@header tabStr="index"/>
 <!-- //header -->
 
 <!-- banner -->
@@ -144,7 +93,7 @@
                 <h3 class="heading mb-4">What We Do</h3>
                 <p class="mb-3">Integer pulvinar leo id viverra feugiat. Pellentesque libero justo, semper at tempus vel, ultrices in ligula. Nulla
                     sollicit sed.</p>
-                <img src="images/about.jpg" alt="" class="img-fluid"/>
+                <img src="/index/images/about.jpg" alt="" class="img-fluid"/>
             </div>
             <div class="col-lg-6 grid1 mt-lg-0 mt-4 pl-lg-5">
                 <h4 class="my-3">Pellentesque libero justo, semper at tempus vel, ultrices in ligula libero ut justo.</h4>
@@ -197,11 +146,11 @@
 <!-- Team section -->
 <section class="team py-5" id="team">
     <div class="container py-lg-5"> 
-        <h3 class="heading mb-5">Our Team Members</h3>
+        <h3 class="heading mb-5">店铺推荐</h3>
         <div class="section_header">
             <div class="row">
                 <div class="col-lg-3 col-sm-6 position-relative">
-                    <img src="images/team1.jpg" class="team_member img-fluid" alt="Team Member">
+                    <img src="/index/images/team1.jpg" class="team_member img-fluid" alt="Team Member">
                     <div class="team_info mt-3 position-absolute">
                         <h3 class="team_name">Suzan Lois</h3>
                         <span class="team_role">Agency Manager</span>
@@ -214,7 +163,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 mt-sm-0 mt-4 position-relative">
-                    <img src="images/team2.jpg" class="team_member img-fluid" alt="Team Member">
+                    <img src="/index/images/team2.jpg" class="team_member img-fluid" alt="Team Member">
                     <div class="team_info mt-3 position-absolute">
                         <h3 class="team_name">Dora Caelan</h3>
                         <span class="team_role">Chief Executive</span>
@@ -227,7 +176,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 mt-lg-0 mt-4 position-relative">
-                    <img src="images/team3.jpg" class="team_member img-fluid" alt="Team Member">
+                    <img src="/index/images/team3.jpg" class="team_member img-fluid" alt="Team Member">
                     <div class="team_info mt-3 position-absolute">
                         <h3 class="team_name">Rosanna</h3>
                         <span class="team_role">CEO & Founder</span>
@@ -240,7 +189,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 mt-lg-0 mt-4 position-relative">
-                    <img src="images/team4.jpg" class="team_member img-fluid" alt="Team Member">
+                    <img src="/index/images/team4.jpg" class="team_member img-fluid" alt="Team Member">
                     <div class="team_info mt-3 position-absolute">
                         <h3 class="team_name">Rose Alpha</h3>
                         <span class="team_role">Chief Manager</span>
@@ -278,22 +227,22 @@
 <!-- Blog section -->
 <section class="blog py-5" id="blog">
     <div class="container py-lg-5"> 
-        <h3 class="heading mb-5">Checkout Our Blog Posts</h3>
+        <h3 class="heading mb-5">同袍信息</h3>
         <div class="row">
             <div class="col-lg-4 col-md-6">
-                <img src="images/blog1.jpg" class="img-fluid" alt="Blog Post1">         
+                <img src="/index/images/blog1.jpg" class="img-fluid" alt="Blog Post1">         
                 <h4 class="my-3">Pellentesque libero justo.</h4>
                 <p>Integer pulvinar leo id viverra feugiat sed. Pellentesque libero ut justo, semper ate tempus vel, ultrices in ligula viverra.</p>
                 <p class="mt-1"><span class="fa fa-calendar" aria-hidden="true"></span> 13 Dec 2019</p>
             </div>
             <div class="col-lg-4 col-md-6 mt-md-0 mt-5">
-                <img src="images/blog2.jpg" class="img-fluid" alt="Blog Post1">         
+                <img src="/index/images/blog2.jpg" class="img-fluid" alt="Blog Post1">         
                 <h4 class="my-3">Pellentesque libero sed.</h4>
                 <p>Integer pulvinar leo id viverra feugiat sed. Pellentesque libero ut justo, semper ate tempus vel, ultrices in ligula viverra.</p>
                 <p class="mt-1"><span class="fa fa-calendar" aria-hidden="true"></span> 14 Dec 2019</p>
             </div>
             <div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
-                <img src="images/blog3.jpg" class="img-fluid" alt="Blog Post1">         
+                <img src="/index/images/blog3.jpg" class="img-fluid" alt="Blog Post1">         
                 <h4 class="my-3">Pellentesque et tempus.</h4>
                 <p>Integer pulvinar leo id viverra feugiat sed. Pellentesque libero ut justo, semper ate tempus vel, ultrices in ligula viverra.</p>
                 <p class="mt-1"><span class="fa fa-calendar" aria-hidden="true"></span> 15 Dec 2019</p>
@@ -336,7 +285,7 @@
         <div class="row footer-grids">
             <div class="col-md-4">
                 <div class="footer-grid left">
-                    <h2 class="logo"><a href="index.html"><span class="fa"></span>华夏衣裳</a></h2>
+                    <h2 class="logo"><a href="index.html"><span class="fa"></span>${platFormName!"华夏衣裳"}</a></h2>
                 </div>
             </div>
             <div class="col-md-4 middle">

@@ -37,6 +37,16 @@ public class IndexLoginController extends BaseController {
     @Autowired
     private RedisService redisService;
 
+    @RequestMapping(value = "showLoginPage")
+    public String showLoginPage() {
+        return "/index/login/loginPage";
+    }
+
+    @RequestMapping(value = "showRegisterPage")
+    public String showRegisterPage() {
+        return "/index/login/registerPage";
+    }
+
     @RequestMapping(value = "checkUserName")
     @ResponseBody
     public Result<String> checkUserName(String userName) {
