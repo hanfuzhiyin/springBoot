@@ -24,7 +24,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
     String[] indexPathPatterns = { "/home/**" };
     String[] adminPathPatterns = { "/admin/**" };
     // 不拦截的路径
-    String[] excludePathPatterns = { "/hello", "/login", "/register", "loginOut" };
+    String[] excludePathPatterns = { "/hello", "/login", "/register", "loginOut", "/open/service/" };
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {

@@ -13,13 +13,14 @@ import com.hxyc.mapper.user.UserMapper;
 import com.hxyc.service.RedisService;
 import com.hxyc.service.index.login.IndexLoginService;
 import com.hxyc.util.common.RSAEncrypt;
+import com.hxyc.util.common.UUIDUtil;
 
 /**
  * @author huangzy
  * @version $Revision: 1.0 $, $Date: 2019年9月3日 下午3:56:03 $
  */
 @Service(value = "indexLoginService")
-public class IndexLoginServiceImpl extends RedisService implements IndexLoginService {
+public class IndexLoginServiceImpl extends RedisService<Object> implements IndexLoginService {
 
     @Autowired
     private UserMapper userMapper;
@@ -30,12 +31,13 @@ public class IndexLoginServiceImpl extends RedisService implements IndexLoginSer
             user.setPublickey(RSAEncrypt.genKeyPair().get(0));
             user.setPrivatekey(RSAEncrypt.genKeyPair().get(1));
             user.setPassWord(RSAEncrypt.encrypt(user.getPassWord(), RSAEncrypt.genKeyPair().get(0)));
+            user.setSalt(UUIDUtil.newUUID(32));
+            leftPush("userEmail", user);
         }
         catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
-
         return userMapper.registerUser(user);
     }
 

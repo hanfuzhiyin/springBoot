@@ -68,14 +68,14 @@
                                 <div class="signin-form">
                                     <div class=" ">
                                         <div class=" ">
-                                            <form action="signin.html">
+                                            <form action="/home/registerUser" method="get">
                                                 <div class="form-group">
                                                     <label for="signin_form">用户名</label>
-                                                    <input type="email" class="form-control" id="signin_form_username" placeholder="请输入你的用户名">
+                                                    <input type="email" class="form-control" name="userName" id="signin_form_username" placeholder="请输入你的用户名"><span id="error"></span>
                                                 </div><!--/.form-group -->
                                                 <div class="form-group">
                                                     <label for="signin_form">密码</label>
-                                                    <input type="password" class="form-control" id="signin_form_password" placeholder="请输入你的密码">
+                                                    <input type="password" class="form-control" name="passWord" id="signin_form_password" placeholder="请输入你的密码">
                                                 </div><!--/.form-group -->
                                             </form><!--/form -->
                                         </div><!--/.col -->
@@ -88,96 +88,26 @@
 
                                             <li>
                                                 <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox" value="value2">
-                                                <label for="styled-checkbox-2">Keep me Signed in</label>
+                                                <label for="styled-checkbox-2">记住我</label>
                                             </li>
 
                                             <li>
-                                                <a href="#">Forgot email or password ?</a>
+                                                <a href="#">忘记密码</a>
                                             </li>
 
                                         </ul>
                                     </div><!--/.awesome-checkbox-list -->
                                 </div><!--/.signin-password -->
 
-
-
                                 <div class="signin-footer">
-                                    <button type="button" class="btn signin_btn" data-toggle="modal" data-target=".signin_modal">
-                                    sign in
+                                    <button type="button" id="login-user" class="btn signin_btn" data-toggle="modal" data-target=".signin_modal">登录
                                     </button>
-                                    <p>
-                                        Don’t have an Account ?
-                                         <a href="signup.html">register</a>
+                                    <p>还没有账号 ?
+                                         <a href="${domain!}/home/showRegisterPage">注册</a>
                                     </p>
                                 </div><!--/.signin-footer -->
 
                             </div><!--/.sign-content -->
-
-                            <!-- modal part start -->
-                            <div class="modal fade signin_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="sign-content">
-
-                                            <div class="modal-header">
-                                                <h2>sign in</h2>
-                                            </div><!--/.modal-header -->
-                                            
-                                            <div class="modal-body">
-                                                <div class="signin-form">
-                                                    <div class=" ">
-                                                        <div class=" ">
-                                                            <form action="signin.html">
-                                                                <div class="form-group">
-                                                                    <label for="signin_form">Email</label>
-                                                                    <input type="email" class="form-control" id="signin_form" placeholder="info@abc.com">
-                                                                </div><!--/.form-group -->
-                                                                <div class="form-group">
-                                                                    <label for="signin_form">password</label>
-                                                                    <input type="password" class="form-control" id="signin_form" placeholder="Password">
-                                                                </div><!--/.form-group -->
-                                                            </form><!--/form -->
-                                                        </div><!--/.col -->
-                                                    </div><!--/.row -->
-
-                                                </div><!--/.signin-form -->
-
-                                                <div class="signin-modal-password">
-                                                    <div class="awesome-checkbox-list">
-                                                        <ul class="unstyled centered">
-
-                                                            <li>
-                                                                <input class="styled-checkbox" id="styled-checkbox-3" type="checkbox" value="value3">
-                                                                <label for="styled-checkbox-3">Keep me Signed in</label>
-                                                            </li>
-
-                                                            <li>
-                                                                <a href="#">Forgot email or password ?</a>
-                                                            </li>
-
-                                                        </ul>
-                                                    </div><!--/.awesome-checkbox-list -->
-                                                </div><!--/.signin-modal-password -->
-
-
-                                                <div class="signin-footer">
-                                                    <button type="button" class="btn signin_btn" data-toggle="modal" data-target=".signin_modal">
-                                                    sign in
-                                                    </button>
-                                                    <p>
-                                                        Don’t have an Account ? 
-                                                        <a href="#">register</a>
-                                                    </p>
-                                                </div><!--/.signin-footer -->
-                                            </div><!--/.modal-body -->
-
-                                        </div><!--/.sign-content -->
-                                    </div><!--/.modal-content -->
-                                </div><!--/.modal-dialog -->
-
-                            </div><!--/.modal -->
-                            <!-- modal part end -->
-
                         </div><!--/.single-sign -->
                     </div><!--/.col -->
                 </div><!--/.row-->
@@ -216,7 +146,32 @@
         
         <!--Custom JS-->
         <script src="/index/js/custom.js"></script>
-
+        <script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $("form input[name='userName']").blur(checkUserName);
+                
+                function checkUserName(){
+                   $("#error").text("");
+                   var name=$(this).val();
+                   $.ajax({
+                    type : "POST",
+                    url : "/home/checkUserName",
+                    data : {"userName":name},
+                    success : function(result) {
+                       if(result.code!=200){
+                        $("#error").text(result.message);
+                       }
+                    },
+                    //请求失败，包含具体的错误信息
+                    error : function(e){
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+              }   
+            });
+        </script>
     </body>
     
 </html>

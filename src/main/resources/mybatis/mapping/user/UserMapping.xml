@@ -10,7 +10,7 @@
     </resultMap>
  
     <insert id="registerUser" parameterType="User">
-        insert into hxyc_user(id,username,password,publickey,privatekey)values(#{id},#{userName},#{passWord},#{publickey},#{privatekey});
+        insert into hxyc_user(id,username,password,publickey,privatekey,salt)values(#{id},#{userName},#{passWord},#{publickey},#{privatekey},#{salt});
     </insert>
     
     <select id="getUserByUserName" parameterType="String" resultType="User">

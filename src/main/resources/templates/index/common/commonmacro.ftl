@@ -37,7 +37,7 @@
                 </nav>
             </div>
             <div class="buttons mt-lg-0 mt-2">
-                <a href="/home/showLoginPage">登录</a>
+                <a href="${domain!}/home/showLoginPage">登录</a>
             </div>
 
         </div>
