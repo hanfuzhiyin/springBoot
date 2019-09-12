@@ -23,10 +23,18 @@ public interface IndexLoginService {
 
     /**
      * 通过用户名查询用户
-     * 
+     *
      * @param userName
      * @return
      */
     User getUserByUserName(String userName);
+
+    /**
+     * 通过邮箱查询
+     *
+     * @param email
+     * @return
+     */
+    User getUserByUserEmail(String email);
 
 }

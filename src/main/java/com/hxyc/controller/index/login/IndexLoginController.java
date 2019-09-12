@@ -57,10 +57,24 @@ public class IndexLoginController extends BaseController {
             if (!Validation.checkUserName(userName)) {
                 return errorAndMes("用户名规则[首字母+数字字母组成的6-12位]");
             }
-            if (redisService.hasKey(userName)) {
-                if (StringUtils.isNotBlank(redisService.get(userName).toString())) {
-                    return errorAndMes("重复的用户名");
-                }
+            User user = indexLoginService.getUserByUserName(userName);
+            if (null != user) {
+                return errorAndMes("重复的用户名");
+            }
+        }
+        return success();
+    }
+
+    @RequestMapping(value = "checkUserEmail")
+    @ResponseBody
+    public Result<String> checkUserEmail(String email) {
+        if (StringUtils.isNotBlank(email)) {
+            if (!Validation.isEmail(email)) {
+                return errorAndMes("邮箱格式不正确,请输入正确的邮箱哦~");
+            }
+            User user = indexLoginService.getUserByUserEmail(email);
+            if (null != user) {
+                return errorAndMes("邮箱已经注册,可以使用邮箱直接登录哦~");
             }
         }
         return success();
@@ -69,12 +83,18 @@ public class IndexLoginController extends BaseController {
     @RequestMapping(value = "/registerUser")
     @ResponseBody
     public Result<String> registerUser(User user) {
-        if (redisService.hasKey(user.getUserName())) {
-            String oldName = redisService.get(user.getUserName()).toString();
-            if (StringUtils.isNotBlank(oldName)) {
-                errorAndMes("重复的用户名");
-            }
+        User oldUser = indexLoginService.getUserByUserName(user.getUserName());
+        if (null != oldUser) {
+            errorAndMes("用户名不可用,请重新更换一个~");
         }
+        if (!Validation.isEmail(user.getEmail())) {
+            return errorAndMes("邮箱格式不正确,请输入正确的邮箱哦~");
+        }
+        oldUser = indexLoginService.getUserByUserEmail(user.getEmail());
+        if (null != oldUser) {
+            errorAndMes("邮箱已经注册,可以使用邮箱直接登录哦~");
+        }
+
         int data = indexLoginService.registerUser(user);
         if (data > 0) {
             return Result.success();

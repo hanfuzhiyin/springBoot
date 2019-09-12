@@ -43,16 +43,12 @@ public class IndexLoginServiceImpl extends RedisService<Object> implements Index
 
     @Override
     public User getUserByUserName(String userName) {
-        if (hasKey(userName)) {
-            User user = (User) get(userName);
-            if (null != (user)) {
-                return user;
-            }
-        }
         User user = userMapper.getUserByUserName(userName);
-        if (null != user) {
-            set(userName, user);
-        }
         return user;
+    }
+
+    @Override
+    public User getUserByUserEmail(String email) {
+        return userMapper.getUserByUserEmail(email);
     }
 }

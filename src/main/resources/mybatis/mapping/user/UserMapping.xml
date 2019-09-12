@@ -10,11 +10,15 @@
     </resultMap>
  
     <insert id="registerUser" parameterType="User">
-        insert into hxyc_user(id,username,password,publickey,privatekey,salt)values(#{id},#{userName},#{passWord},#{publickey},#{privatekey},#{salt});
+        insert into hxyc_user(id,username,password,publickey,privatekey,salt,email,status)values(#{id},#{userName},#{passWord},#{publickey},#{privatekey},#{salt},#{email},-1);
     </insert>
     
     <select id="getUserByUserName" parameterType="String" resultType="User">
-        select * from hxyc_user where username=#{0};
+        select * from hxyc_user where username=#{0} and status=1;
+    </select>
+    
+    <select id="getUserByUserEmail" parameterType="String" resultType="User">
+        select * from hxyc_user where email=#{0} and status=1;
     </select>
     
 </mapper>

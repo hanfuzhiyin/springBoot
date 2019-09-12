@@ -19,4 +19,6 @@ public interface UserMapper {
     Integer registerUser(User user);
 
     User getUserByUserName(String userName);
+
+    User getUserByUserEmail(String email);
 }
